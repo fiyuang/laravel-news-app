@@ -12,9 +12,22 @@ class Comment extends Model
 
     public $timestamps = true;
 
+    protected $fillable = [
+        'uuid',
+        'title',
+        'description',
+        'created_by',
+        'news_id',
+    ];
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class);
+    }
+
+    public function news()
+    {
+        return $this->belongsTo(News::class);
     }
 
 }

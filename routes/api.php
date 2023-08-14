@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,16 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::get('/user', [UserController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/news', [NewsController::class, 'store']);
-    Route::post('/news/{id}', [NewsController::class, 'update']);
-    Route::delete('/news/{id}', [NewsController::class, 'destroy']);
-    Route::get('/news/{id}', [NewsController::class, 'show']);
-    Route::get('/news', [NewsController::class, 'index']);
+
+    Route::prefix("news")->group(function () {
+        Route::post('/', [NewsController::class, 'store']);
+        Route::post('/{id}', [NewsController::class, 'update']);
+        Route::delete('/{id}', [NewsController::class, 'destroy']);
+        Route::get('/{id}', [NewsController::class, 'show']);
+        Route::get('/', [NewsController::class, 'index']);
+    });
+
+    Route::prefix("comments")->group(function () {
+        Route::post('/{newsId}', [CommentController::class, 'store']);
+    });
 });
