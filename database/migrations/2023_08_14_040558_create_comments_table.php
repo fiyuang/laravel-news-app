@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->uuid("uuid")->nullable()->index();
             $table->string('title');
             $table->text('description');
             $table->bigInteger("news_id")->nullable()->unsigned()->index();
             $table->bigInteger("created_by")->nullable()->unsigned()->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -11,6 +11,7 @@ class News extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'uuid',
         'title',
         'description',
         'image',

@@ -27,4 +27,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/user', [UserController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/news', [NewsController::class, 'store']);
+    Route::post('/news/{id}', [NewsController::class, 'update']);
+    Route::delete('/news/{id}', [NewsController::class, 'destroy']);
+    Route::get('/news/{id}', [NewsController::class, 'show']);
+    Route::get('/news', [NewsController::class, 'index']);
 });
