@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Http\Requests\NewsRequest;
 use App\Http\Resources\NewsResource;
 use App\Repositories\NewsRepository;
+use App\Events\NewsAction;
 
 class NewsController extends Controller
 {
@@ -48,6 +49,7 @@ class NewsController extends Controller
         $data['created_by'] = Auth::id();
 
         $news = $this->newsRepository->create($data);
+        event(new NewsAction($news, 'created', Auth::id()));
 
         return new NewsResource($news);
     }
@@ -70,6 +72,7 @@ class NewsController extends Controller
         }
 
         $news->update($data);
+        event(new NewsAction($news, 'updated', Auth::id()));
 
         return response([ 
             'data' => new NewsResource($news), 
@@ -89,6 +92,7 @@ class NewsController extends Controller
         }
 
         $news->delete();
+        event(new NewsAction($news, 'deleted', Auth::id()));
 
         return response()->json(['message' => 'News deleted successfully']);
     }

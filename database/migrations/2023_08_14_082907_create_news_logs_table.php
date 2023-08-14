@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('news_logs', function (Blueprint $table) {
             $table->id();
             $table->uuid("uuid")->nullable()->index();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('news_id');
+            $table->string('action');
             $table->string('title');
-            $table->text('description');
-            $table->bigInteger("news_id")->nullable()->unsigned()->index();
-            $table->bigInteger("created_by")->nullable()->unsigned()->index();
             $table->timestamps();
             $table->softDeletes();
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('news_logs');
     }
 };
