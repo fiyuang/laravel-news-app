@@ -16,7 +16,7 @@ This API developed with PHP 8.1, Laravel Framework 10.18.0
 Before you running the program, make sure you've run this command:
 - `composer install` or `composer update`
 -  Rename `.env.example` to `.env`
--  Generate the jwt secret key with `php artisan key:generate`
+-  Generate the app key with `php artisan key:generate`
 -  Run `php artisan passport:install` to create personal access client & password grant client
 
 ### Database setup:
