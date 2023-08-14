@@ -22,14 +22,14 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = News::with('user')->paginate(5);
+        $news = News::with('user', 'comments')->paginate(5);
 
         return NewsResource::collection($news);
     }
 
     public function show($id)
     {
-        $news = News::with('user')->where("uuid", $id)->first();
+        $news = News::with('user', 'comments')->where("uuid", $id)->first();
 
         return new NewsResource($news);
     }

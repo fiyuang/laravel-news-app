@@ -22,7 +22,7 @@ class NewsResource extends JsonResource
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
             "created_by" => new UserResource($this->whenLoaded('user')),
-
+            "comments" => CommentResource::collection($this->whenLoaded('comments')),
         ];    
     }
 }
